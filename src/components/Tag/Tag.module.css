@@ -1,0 +1,19 @@
+.tagContainer {
+  background-color: whitesmoke;
+  position: relative;
+}
+
+.tagContainer:hover .close {
+  position: absolute;
+  display: block;
+  right: 5px;
+  top: 0;
+}
+
+.close {
+  display: none;
+}
+
+.close:after {
+  content: "\00d7";
+}
