@@ -37,12 +37,29 @@ function App() {
     });
   }
 
+  const onNewTagAdded = (sectionName: string, value: string, tagType: TAG_TYPE): void => {
+    console.log('onNewTagAdded', value);
+    setSupplier({
+      ...supplier,
+      [sectionName]: [...(supplier[sectionName as SupplierKeys] as ITag[]), {
+        id: new Date().getTime(),
+        name: value,
+        type: tagType
+      }]
+    });
+  }
+
   return (
     <div className="container mx-auto px-4">
       <Header title={supplier.name}></Header>
       {Object.keys(supplier).map((key: string) => {
         if (key === 'name') return null;
-        return <Section onTagRemove={onTagRemove} type={key} tags={(supplier[key as SupplierKeys] as ITag[])} key={key}></Section>
+        return <Section
+          onNewTagAdded={onNewTagAdded}
+          onTagRemove={onTagRemove}
+          type={key}
+          tags={(supplier[key as SupplierKeys] as ITag[])}
+          key={key}></Section>
       })}
     </div>
   );

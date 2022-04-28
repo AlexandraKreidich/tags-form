@@ -1,0 +1,4 @@
+.suggestionActive,
+.suggestions li:hover {
+  background-color: gainsboro;
+}
