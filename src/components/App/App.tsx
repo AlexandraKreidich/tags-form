@@ -38,7 +38,6 @@ function App() {
   }
 
   const onNewTagAdded = (sectionName: string, value: string, tagType: TAG_TYPE): void => {
-    console.log('onNewTagAdded', value);
     setSupplier({
       ...supplier,
       [sectionName]: [...(supplier[sectionName as SupplierKeys] as ITag[]), {

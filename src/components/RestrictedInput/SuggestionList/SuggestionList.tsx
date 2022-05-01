@@ -3,7 +3,7 @@ import styles from './SuggestionList.module.css';
 
 export function SuggestionList(props: ISuggestionListProps) {
 
-  return <ul className={`w-32 absolute border-solid border-2 border-t-[0] ${styles.suggestions}`}>
+  return <ul className={`w-32 z-10 absolute border-solid border-2 border-t-[0] ${styles.suggestions}`}>
     {props.suggestions.map((suggestion, index) => {
       let className;
       if (index === props.activeSuggestionIndex) {

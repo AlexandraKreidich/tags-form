@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { RefObject, useEffect, useRef, useState } from 'react';
 import SuggestionList from './SuggestionList';
 import { IRestrictedInputProps } from './types';
 
@@ -8,7 +8,20 @@ export function RestrictedInput(props: IRestrictedInputProps) {
   const [showSuggestions, setShowSuggestions] = useState<boolean>(false);
   const [input, setInput] = useState<string>("");
 
-  const inputElement = useRef<HTMLInputElement>(null);
+  const divElement = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    }
+  }, [])
+
+  const handleClickOutside = (e: MouseEvent) => {
+    if (divElement.current && !divElement.current.contains(e.target as Node)) {
+      setShowSuggestions(false);
+    }
+  }
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const userInput = e.target.value;
@@ -49,9 +62,8 @@ export function RestrictedInput(props: IRestrictedInputProps) {
     setShowSuggestions(true);
   }
 
-  return (<div className='px-4'>
+  return (<div className='px-4' ref={divElement}>
     <input
-      ref={inputElement}
       className="w-32 shadow appearance-none border rounded text-gray-700 leading-tight focus:outline-none focus:shadow-outline relative"
       id="tag"
       type="text"

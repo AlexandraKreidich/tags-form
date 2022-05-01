@@ -2,3 +2,7 @@
 .suggestions li:hover {
   background-color: gainsboro;
 }
+
+.suggestions {
+  background-color: white;
+}

@@ -31,7 +31,8 @@ export function Section(props: ISectionProps) {
   }
 
   const onTagAdded = (value: string, isInputVisible: boolean): void => {
-    props.onNewTagAdded(props.type, value, props.tags[0].type);
+    const tagType = `supplierBranch-${props.type.split('-')[1]}`
+    props.onNewTagAdded(props.type, value, tagType);
     setIsInputVisible(isInputVisible);
   }
 
@@ -41,8 +42,8 @@ export function Section(props: ISectionProps) {
     <div className="container mx-auto px-4 my-4">
       <h3 className="text-left my-2">{SectionName}</h3>
       <div className="flex gap-2">
-        {props.tags.map((tag: ITag) => {
-          return <Tag id={tag.id} onRemove={onTagRemove} name={tag.name} key={tag.id} type={tag.type} isReadOnly={tag.id === 1}></Tag>
+        {props.tags.map((tag: ITag, index: number) => {
+          return <Tag id={tag.id} onRemove={onTagRemove} name={tag.name} key={tag.id} type={tag.type} isReadOnly={index === 0}></Tag>
         })}
         {
           isInputVisible && tagSuggestions.length ? <RestrictedInput onNewTagAdded={onTagAdded} suggestions={tagSuggestions}></RestrictedInput> : <></>
