@@ -1,4 +1,4 @@
-import React, { RefObject, useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import SuggestionList from './SuggestionList';
 import { IRestrictedInputProps } from './types';
 
@@ -51,6 +51,7 @@ export function RestrictedInput(props: IRestrictedInputProps) {
       props.onNewTagAdded(filteredSuggestions[activeSuggestionIndex], false);
     }
     if (e.key === 'Tab') {
+      e.preventDefault()
       props.onNewTagAdded(filteredSuggestions[activeSuggestionIndex], true);
       setInput('');
       setFilteredSuggestions(props.suggestions);

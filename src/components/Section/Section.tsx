@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { ITag } from '../App/types';
+import Input from '../Input';
 import RestrictedInput from '../RestrictedInput';
 import Tag from '../Tag';
 import { ISectionProps } from './types';
@@ -46,7 +47,9 @@ export function Section(props: ISectionProps) {
           return <Tag id={tag.id} onRemove={onTagRemove} name={tag.name} key={tag.id} type={tag.type} isReadOnly={index === 0}></Tag>
         })}
         {
-          isInputVisible && tagSuggestions.length ? <RestrictedInput onNewTagAdded={onTagAdded} suggestions={tagSuggestions}></RestrictedInput> : <></>
+          isInputVisible && tagSuggestions.length ?
+            <RestrictedInput onNewTagAdded={onTagAdded} suggestions={tagSuggestions}></RestrictedInput> :
+            isInputVisible ? <Input onNewTagAdded={onTagAdded}></Input> : null
         }
         <p className="px-2 rounded-lg cursor-pointer" onClick={onNewTagClicked}>+ New Tag</p>
       </div>
